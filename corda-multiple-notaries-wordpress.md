@@ -93,6 +93,6 @@ Achieving high performance within a Corda network relies on removing bottlenecks
 
 One last comment I will throw in here. As the internal performance of Notaries increase, the need for this sort of architecture will decrease. There might even reach a point where a single Notary is able to completely handle a large rate of incoming requests. This is an area to keep an eye on as Corda continues to improve its overall performance.
 
-The code used in this post can be found on my <a href="https://github.com/lankydan/corda-service-trackby-flows" target="_blank" rel="noopener">GitHub</a>.
+The code used in this post can be found on my <a href="https://github.com/lankydan/corda-multiple-notaries" target="_blank" rel="noopener">GitHub</a>.
 
 If you found this post helpful, you can follow me on Twitter at <a href="http://www.twitter.com/LankyDanDev" target="_blank" rel="noopener">@LankyDanDev</a> to keep up with my new posts.
