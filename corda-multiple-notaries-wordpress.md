@@ -38,7 +38,7 @@ Below is a possible algorithm to choose which Notary to use:
 
 [gist  https://gist.github.com/lankydan/535a6fdc12bc9903bc7749a88714afc0 /]
 
-In this example, the transaction chooses the Notary to use based on the `hashCode` of one of the input state's properties and the number of Notaries in the network.
+In this example, the transaction chooses the Notary to use based on the <code>hashCode</code> of one of the input state's properties and the number of Notaries in the network.
 
 How you choose the Notary could be as simple or complex as you need it to be. This will depend on requirements such as only a subset of Notaries being trusted for proposed transactions or resiliency to the Notaries in the network changing.
 
@@ -48,7 +48,7 @@ This is nice and simple... If all input states reference the same Notary. Below 
 
 [gist https://gist.github.com/lankydan/4d2ed4fa4f82fea6befb87c26fbc8190 /]
 
-As you can see, all the transaction does is retrieve the Notary that is related to the input state and uses it for itself. This information can be extracted because `message` is a `StateAndRef` and accessing its `state` property will return a `TransactionState`. Following this format. Creating new transactions that consume a state and produce a number of outputs is straightforward. This format is also valid for multiple input states. If, and only if, they all reference the same Notary.
+As you can see, all the transaction does is retrieve the Notary that is related to the input state and uses it for itself. This information can be extracted because <code>message</code> is a <code>StateAndRef</code> and accessing its <code>state</code> property will return a <code>TransactionState</code>. Following this format. Creating new transactions that consume a state and produce a number of outputs is straightforward. This format is also valid for multiple input states. If, and only if, they all reference the same Notary.
 
 So... With all this talk about input states with different Notaries. I should probably discuss it further.
 
@@ -71,9 +71,9 @@ The code to perform a Notary Change Transaction looks like the below:
 
 [gist https://gist.github.com/lankydan/5b828915c930e29bc1d17f9e1bd772bb /]
 
-I am sure you can figure out what is going on yourself, but to make myself feel smarter... I am going to tell you. `message` represents an input state and `notary` is the Notary that the new transaction will be using. If the Notaries are the same, then the state can be returned as nothing needs to be done to it. If they are indeed different, then call `NotaryChangeFlow` which takes in the two arguments passed into the original function. This will return a new `StateAndRef` which is then returned from the function.
+I am sure you can figure out what is going on yourself, but to make myself feel smarter... I am going to tell you. <code>message</code> represents an input state and <code>notary</code> is the Notary that the new transaction will be using. If the Notaries are the same, then the state can be returned as nothing needs to be done to it. If they are indeed different, then call <code>NotaryChangeFlow</code> which takes in the two arguments passed into the original function. This will return a new <code>StateAndRef</code> which is then returned from the function.
 
-The `StateAndRef` returned from this function can then be put into the transaction.
+The <code>StateAndRef</code> returned from this function can then be put into the transaction.
 
 If you are not sure whether the states being passed into a transaction are from the same Notary, then I suggest sticking to the code in this section. Choose a Notary that the transaction will use, whether this is a specific one or one taken from the input states and perform a Notary Change Transaction on any that require it. For example, I think code similar to the below would make a generic and robust solution:
 
@@ -81,7 +81,7 @@ If you are not sure whether the states being passed into a transaction are from 
 
 Here a specific Notary is chosen for the transaction, each input has its Notary changed to the chosen one if required and the signers comprise of all the participants of the consumed states. This might not suit your own use-case. Which is perfectly fine. But this should provide a good starting point when playing around with changing Notaries (mainly for performance).
 
-Altering this solution slightly, we can instead choose the Notary based on the Notaries the input states reference. Since only the `notary` function really needs to change I have excluded the rest of the code from the example.
+Altering this solution slightly, we can instead choose the Notary based on the Notaries the input states reference. Since only the <code>notary</code> function really needs to change I have excluded the rest of the code from the example.
 
 [gist https://gist.github.com/lankydan/c2523aadf6e3dda543d261f2b705e2c3 /]
 
